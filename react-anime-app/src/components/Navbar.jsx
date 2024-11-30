@@ -6,6 +6,7 @@ function Navbar() {
             <Link to="/">Home</Link>
             <Link to="/contact">Contact</Link>
             <Link to="/product">Product</Link>
+            <Link to="/favorites">Favorites</Link>
         </nav>
     );
 }

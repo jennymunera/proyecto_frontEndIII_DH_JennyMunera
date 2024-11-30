@@ -4,6 +4,7 @@ import Contact from './pages/Contact';
 import Product from './pages/Product';
 import AnimeDetails from './components/AnimeDetails';
 import Navbar from './components/Navbar';
+import Favorites from './pages/Favorites';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/product" element={<Product />} />
         <Route path="/character/:id" element={<AnimeDetails />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </Router>
   );

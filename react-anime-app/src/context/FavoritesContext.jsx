@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 
 const FavoritesContext = createContext();
 
@@ -21,6 +22,10 @@ export function FavoritesProvider({ children }) {
         </FavoritesContext.Provider>
     );
 }
+
+FavoritesProvider.propTypes = {
+    children: PropTypes.node.isRequired,
+};
 
 export function useFavorites() {
     return useContext(FavoritesContext);

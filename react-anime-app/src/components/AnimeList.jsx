@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useFavorites } from '../context/FavoritesContext';
 
 function AnimeList() {
     const [animes, setAnimes] = useState([]);
+    const { addFavorite } = useFavorites();
 
     useEffect(() => {
         const fetchAnimes = async () => {
@@ -21,6 +23,7 @@ function AnimeList() {
                 {animes.map((anime) => (
                     <li key={anime.mal_id}>
                         <Link to = {`/character/${anime.mal_id}`}>{anime.title}</Link>
+                        <button onClick={() => addFavorite(anime)}>Add to favorites</button>
                     </li>
                 ))}
             </ul>

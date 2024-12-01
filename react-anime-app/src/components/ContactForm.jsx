@@ -20,7 +20,7 @@ function Contact() {
 
     return (
         <div>
-            <h2>Contactenos: ya sea para reportar un fallo, recomendarlos algo que no esté en la lista o Felicitarnos</h2>
+            <h2>Envienos un Mensaje ya sea para reportar un fallo, recomendarlos algo que no esté en la lista o Felicitarnos</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Nombre:</label>

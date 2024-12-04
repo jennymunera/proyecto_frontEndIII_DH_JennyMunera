@@ -7,13 +7,13 @@ function AnimeList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1); 
     const { addFavorite } = useFavorites();
-    const [sortByRating, setSortByRating] = useState(false); // Filtro por calificación
+    const [sortByRating, setSortByRating] = useState(false); 
 
     useEffect(() => {
         const fetchAnimes = async () => {
             let url = `https://api.jikan.moe/v4/anime?page=${currentPage}`;
 
-            // Si hay un filtro de calificación, agregamos los parámetros correspondientes en la URL
+            //  filtro de calificación
             if (sortByRating) {
                 url += `&order_by=score&sort=desc`;
             }
@@ -65,7 +65,7 @@ function AnimeList() {
 
             <ul>
                 {animes.map((anime) => (
-                    <li key={anime.mal_id}>
+                    <li className = "anime-list-card" key={anime.mal_id}>
                         <img src={anime.images.jpg.image_url} alt={anime.title} />
                         <h3>{anime.title}</h3>
                         <p>Calificación: {anime.score}</p>

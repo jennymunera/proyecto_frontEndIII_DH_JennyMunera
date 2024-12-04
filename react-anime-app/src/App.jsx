@@ -31,7 +31,7 @@ function App() {
         </Routes>
       </main>
       <footer>
-        <p>&copy; 2024 OtakuHaven All rights reserved.</p>
+        <p>&copy; 2024 OtakuHaven All rights reserved - By: Jenny Múnera Serna</p>
       </footer>
     </Router>
   );

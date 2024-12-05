@@ -13,6 +13,8 @@ function ContactForm() {
         message: '',
     });
 
+    const [formStatus, setFormStatus] = useState('');
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -22,35 +24,43 @@ function ContactForm() {
     const validateField = (name, value) => {
         let error = '';
 
-        if (name === 'name' && (!value || value.length < 3)) {
-            error = 'El nombre debe tener al menos 3 caracteres.';
-        }else if (name === 'name' && !/^[a-zA-Z\s]*$/.test(value)) {
-            error = 'El nombre solo puede contener letras y espacios.';
-        } else if (name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-            error = 'Por favor, introduce un correo válido.';
-        } else if (name === 'message' && value.length < 10) {
-            error = 'El mensaje debe tener al menos 10 caracteres.';
+        if (name === 'name') {
+            if (!value || value.length < 3) {
+                error = 'El nombre debe tener al menos 3 caracteres.';
+            } else if (!/^[a-zA-Z\s]*$/.test(value)) {
+                error = 'El nombre solo puede contener letras y espacios.';
+            }
+        } else if (name === 'email') {
+            if (!/\S+@\S+\.\S+/.test(value)) {
+                error = 'Por favor, introduce un correo válido.';
+            }
+        } else if (name === 'message') {
+            if (value.length < 10) {
+                error = 'El mensaje debe tener al menos 10 caracteres.';
+            }
         }
 
-        setErrors((prevErrors) => ({
-            ...prevErrors,
-            [name]: error,
-        }));
+        setErrors((prevErrors) => {
+            const newErrors = { ...prevErrors, [name]: error };
+            console.log('Errores actualizados:', newErrors); // Depuración
+            return newErrors;
+        });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const { name, email, message } = formData;
 
-        // Validaciones 
+        validateField('name', name);
+        validateField('email', email);
+        validateField('message', message);
+
         if (!name || !email || !message || Object.values(errors).some((error) => error)) {
-            alert('Por favor, completa todos los campos correctamente.');
+            setFormStatus('Por favor, completa todos los campos correctamente.');
             return;
         }
-        console.log('Datos enviados:', formData);
-        alert('¡Formulario enviado correctamente!');
-        setFormData({ name: '', email: '', message: '' }); 
+        setFormStatus('Formulario Enviado Correctamente...');
+        setFormData({ name: '', email: '', message: '' });
     };
 
     return (
@@ -91,6 +101,7 @@ function ContactForm() {
                 {errors.message && <small className="error">{errors.message}</small>}
             </div>
             <button type="submit">Enviar</button>
+            {formStatus && <p className="form-status">{formStatus}</p>}
         </form>
     );
 }
